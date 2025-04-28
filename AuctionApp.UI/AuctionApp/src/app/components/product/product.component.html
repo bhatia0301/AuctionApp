@@ -1,0 +1,43 @@
+<div class="container my-4">
+  <div *ngIf="loading" class="text-center">
+    <div class="loader"></div>
+  </div>
+  <div *ngIf="!loading">
+    <div class="mb-1">
+      <a class="btn btn-secondary" (click)="navigateBack()" role="button">
+        <i class="bi bi-arrow-left"></i>
+      </a>
+    </div>
+    <div class="row">
+      <div class="col-md-6 d-flex justify-content-center align-items-center">
+        <img [src]="product.productImage" alt="{{ product.name }}" class="img-fluid rounded shadow">
+      </div>
+      <div class="col-md-6">
+        <div class="product-details">
+          <div class="auction-status mb-3">
+            <span class="badge" [ngClass]="{ 
+                'bg-danger': auctionStatus === 'Product has been sold', 
+                'bg-warning': auctionStatus === 'Auction Ended', 
+                'bg-success': auctionStatus === 'Auction Ongoing' 
+              }">
+              {{ auctionStatus }}
+            </span>
+          </div>
+          <h1 class="product-name mb-3">{{ product.name }}</h1>
+          <p class="product-category mb-2"><strong>Category:</strong> {{ product.categoryName }}</p>
+          <p class="product-description mb-4">{{ product.description }}</p>
+          <div class="product-price text-center mb-4">
+            <span class="h3">{{ product.startingPrice | currency:'INR' }}</span>
+          </div>
+          <div class="auction-duration text-center mb-4">
+            <span class="badge bg-danger" [ngClass]="{ 'expired': !isAuctionOngoing }">
+              <ng-container *ngIf="isAuctionOngoing && auctionStatus === 'Auction Ongoing'">
+                Auction ends in {{ remainingTime }}
+              </ng-container>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

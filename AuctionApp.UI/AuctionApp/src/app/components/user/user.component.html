@@ -1,0 +1,67 @@
+<div class="container my-4">
+  <div *ngIf="loading" class="text-center">
+    <div class="loader"></div>
+  </div>
+  <a class="btn btn-secondary" routerLink="/admin-dashboard" role="button">
+    <i class="bi bi-arrow-left"></i>
+  </a>
+  <div *ngIf="!loading">
+    <h1 class="text-center mb-4 text-info">{{ user?.fullName }}</h1>
+    <div class="row">
+      <div class="col-md-6">
+        <h4 class="text-center">Purchased Products</h4>
+        <table class="table table-bordered table-sm table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">S.No</th>
+              <th scope="col">Image</th>
+              <th scope="col">Name</th>
+              <th scope="col">Category</th>
+              <th scope="col">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of buyProducts; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td><img [src]="product.productImage" alt="{{ product.name }}" class="img-fluid"
+                  style="max-height: 50px; width: auto;"></td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.categoryName }}</td>
+              <td>{{ product.reservedPrice | currency: 'INR' }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="!loading && buyProducts.length === 0" class="text-center text-muted">
+          No products found.
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h4 class="text-center">Sold Products</h4>
+        <table class="table table-bordered table-sm table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">S.No</th>
+              <th scope="col">Image</th>
+              <th scope="col">Name</th>
+              <th scope="col">Category</th>
+              <th scope="col">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of sellProducts; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td><img [src]="product.productImage" alt="{{ product.name }}" class="img-fluid"
+                  style="max-height: 50px; width: auto;"></td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.categoryName }}</td>
+              <td>{{ product.startingPrice | currency:'INR' }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="!loading && sellProducts.length === 0" class="text-center text-muted">
+          No products found.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+.img-fluid {
+  max-height: 400px;
+  width: auto;
+}
+
+.product-details {
+  margin-top: 5px;
+}
+
+.product-name {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.product-description {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: #6c757d;
+}
+
+.product-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #212529;
+}
+
+.product-category {
+  font-size: 1.1rem;
+  color: #6c757d;
+}
+
+.auction-status {
+  margin-bottom: 10px;
+}
+
+.auction-duration {
+  margin-top: 5px;
+}
+
+.badge.bg-danger {
+  font-size: 1rem;
+  padding: 5px 10px;
+  border-radius: 0.25rem;
+}
+
+.expired {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.container {
+  padding-top: 20px;
+}

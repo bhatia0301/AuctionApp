@@ -1,0 +1,35 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">User Bid Details</h2>
+
+  <div *ngIf="loading" class="text-center">
+    <div class="loader"></div>
+  </div>
+
+  <div *ngIf="!loading && userBids.length > 0">
+    <table class="table table-bordered table-striped">
+      <thead class="text-center">
+        <tr>
+          <th scope="col">S.No</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Category</th>
+          <th scope="col">Bid Amount</th>
+          <th scope="col">Bid Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bid of userBids; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ bid.productName }}</td>
+          <td>{{ bid.productDescription }}</td>
+          <td>{{ bid.categoryName }}</td>
+          <td>{{ bid.bidAmount | currency:'INR' }}</td>
+          <td>{{ bid.createdAt | date:'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="loading && userBids.length === 0" class="alert alert-info text-center">
+    No bids found.
+  </div>
+</div>

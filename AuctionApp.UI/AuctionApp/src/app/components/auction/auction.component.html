@@ -1,0 +1,37 @@
+<div class="container my-4">
+  <div *ngIf="loading" class="text-center">
+    <div class="loader"></div>
+  </div>
+  <div *ngIf="!loading">
+    <div class="mb-3">
+      <a class="btn btn-secondary" routerLink="/all-auctions" role="button">
+        <i class="bi bi-arrow-left"></i>
+      </a>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="mb-4 text-center text-black">{{ auction.productName }}</h2>
+      </div>
+      <div class="col-md-6 d-flex justify-content-center align-items-center">
+        <img [src]="auction.productImage" alt="{{ auction.productName }}" class="img-fluid rounded shadow"
+          style="max-height: 400px; width: auto;">
+      </div>
+      <div class="col-md-6">
+        <div class="product-details">
+          <div class="mb-3">
+            {{ auction.productDescription }}
+          </div>
+          <div class="mb-3">
+            <strong>Category:</strong> {{ auction.categoryName }}
+          </div>
+          <div class="mb-3">
+            <strong>Current Highest Bid:</strong> {{ auction.currentHighestBid | currency:'INR' }}
+          </div>
+          <div class="mb-3">
+            <strong>Highest Bidder:</strong> {{ auction.fullName }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

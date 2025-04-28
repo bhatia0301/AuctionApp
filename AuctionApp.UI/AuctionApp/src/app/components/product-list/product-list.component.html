@@ -1,0 +1,59 @@
+<div class="container my-3">
+  <div class="d-flex justify-content-center mb-3">
+    <div class="d-flex align-items-center">
+      <input type="text" class="form-control small-search-bar" [(ngModel)]="searchProduct.searchTerm"
+        (input)="onSearchSubmit()" placeholder="Search..">
+      <button class="btn btn-outline-primary ms-2" (click)="onSearchSubmit()">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+    <div class="d-flex align-items-center ms-3">
+      <select class="form-select me-2" [(ngModel)]="searchProduct.sortBy" (change)="onSortByChange()">
+        <option value="">Sort By</option>
+        <option value="startingPrice">Price</option>
+        <option value="timeRemaining">Time Remaining</option>
+      </select>
+      <select class="form-select" [(ngModel)]="searchProduct.sortDescending" (change)="onSortDirectionChange()">
+        <option [value]="true">Descending</option>
+        <option [value]="false">Ascending</option>
+      </select>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="text-center">
+    <div class="loader"></div>
+  </div>
+
+  <div class="card shadow">
+    <div class="card-body">
+      <table *ngIf="!loading && products.length > 0" class="table table-striped table-bordered text-center">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Sr.No</th>
+            <th scope="col">Image</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+              <img [src]="product.productImage" alt="{{ product.name }}" class="img-fluid"
+                style="max-width: 100px; height: auto;">
+            </td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>
+              <button class="btn btn-primary btn-sm me-2" (click)="viewProductDetails(product.id)">View</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="!loading && products.length === 0" class="text-center text-muted">
+        No products found.
+      </div>
+    </div>
+  </div>
+</div>

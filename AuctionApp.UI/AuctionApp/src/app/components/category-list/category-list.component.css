@@ -1,0 +1,15 @@
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.table {
+  margin-bottom: 1rem;
+}
+
+form {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,28 @@
+.input-group {
+  max-width: 500px;
+}
+
+.form-control {
+  flex: 1;
+}
+
+.btn-outline-secondary {
+  border: 1px solid #ccc;
+  color: #333;
+
+}
+
+.btn-outline-secondary:hover {
+  background-color: #f8f9fa;
+}
+
+.btn-outline-secondary .bi {
+  font-size: 1.2rem;
+}
+
+.bi-search,
+.bi-arrow-up,
+.bi-arrow-down,
+.bi-x-circle {
+  font-size: 1.2rem;
+}

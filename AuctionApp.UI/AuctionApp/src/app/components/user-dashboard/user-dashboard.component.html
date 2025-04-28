@@ -1,0 +1,37 @@
+<div class="container my-3">
+  <div *ngIf="loading" class="text-center">
+    <div class="loader"></div>
+  </div>
+  <div class="card shadow">
+    <div class="card-body">
+      <table *ngIf="!loading && availableProducts.length > 0" class="table table-striped table-bordered text-center">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Sr.No</th>
+            <th scope="col">Image</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of availableProducts; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+              <img [src]="product.productImage" alt="{{ product.name }}" class="img-fluid"
+                style="max-width: 100px; height: auto;">
+            </td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm me-2" [routerLink]="['/place-bid', product.id]">Bid</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="!loading && availableProducts.length === 0" class="text-center text-muted">
+        No products available for bid.
+      </div>
+    </div>
+  </div>
+</div>

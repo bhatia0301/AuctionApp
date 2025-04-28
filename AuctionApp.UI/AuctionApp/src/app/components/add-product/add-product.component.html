@@ -1,0 +1,84 @@
+<div class="container my-4">
+  <h2 class="text-center mb-4 heading-small">Add New Product</h2>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input id="name" formControlName="name" type="text" class="form-control form-control-sm input-width"
+        placeholder="Enter product name" />
+      <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="text-danger">
+        <div *ngIf="productForm.get('name')?.errors?.['required']">Name is required.</div>
+        <div *ngIf="productForm.get('name')?.errors?.['pattern']">Name must contain only alphabets and spaces.</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" formControlName="description" class="form-control form-control-sm input-width" rows="3"
+        placeholder="Enter product description"></textarea>
+      <div *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched"
+        class="text-danger">
+        <div *ngIf="productForm.get('description')?.errors?.['required']">Description is required.</div>
+        <div *ngIf="productForm.get('description')?.errors?.['maxlength']">Description cannot be more than 500
+          characters.</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="startingPrice" class="form-label">Starting Price</label>
+      <input id="startingPrice" formControlName="startingPrice" type="number" step="1"
+        class="form-control form-control-sm input-width" placeholder="Enter starting price" />
+      <div *ngIf="productForm.get('startingPrice')?.invalid && productForm.get('startingPrice')?.touched"
+        class="text-danger">
+        <div *ngIf="productForm.get('startingPrice')?.errors?.['required']">Starting price is required.</div>
+        <div *ngIf="productForm.get('startingPrice')?.errors?.['min']">Starting price must be at least 1.</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="auctionDuration" class="form-label">Auction Duration (in hours)</label>
+      <input id="auctionDuration" formControlName="auctionDuration" type="number"
+        class="form-control form-control-sm input-width" placeholder="Enter auction duration" />
+      <div *ngIf="productForm.get('auctionDuration')?.invalid && productForm.get('auctionDuration')?.touched"
+        class="text-danger">
+        <div *ngIf="productForm.get('auctionDuration')?.errors?.['required']">Auction duration is required.</div>
+        <div *ngIf="productForm.get('auctionDuration')?.errors?.['min']">Auction duration must be a positive number.
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select id="category" formControlName="category" class="form-select form-select-sm input-width">
+        <option value="">Select a category</option>
+        <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+      </select>
+      <div *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched" class="text-danger">
+        <div *ngIf="productForm.get('category')?.errors?.['required']">Category is required.</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="reservedPrice" class="form-label">Reserved Price</label>
+      <input id="reservedPrice" formControlName="reservedPrice" type="number" step="1"
+        class="form-control form-control-sm input-width" placeholder="Enter reserved price" />
+      <div *ngIf="productForm.get('reservedPrice')?.invalid && productForm.get('reservedPrice')?.touched"
+        class="text-danger">
+        <div *ngIf="productForm.get('reservedPrice')?.errors?.['required']">Reserved price is required.</div>
+        <div *ngIf="productForm.get('startingPrice')?.errors?.['min']">Starting price must be at least 1.</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="productImage" class="form-label">Product Image</label>
+      <input id="productImage" formControlName="productImage" type="file" accept=".jpg, .png"
+        class="form-control form-control-sm input-width" (change)="onFileSelected($event)" />
+    </div>
+    <div *ngIf="productForm.get('productImage')?.invalid && productForm.get('productImage')?.touched"
+      class="text-danger">
+      <div *ngIf="productForm.get('productImage')?.errors?.['required']">Image is required.</div>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Create Product</button>
+    </div>
+  </form>
+</div>
