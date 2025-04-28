@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuctionService {
-  private apiUrl = 'http://namanbhatia0301-001-site1.ktempurl.com/api/auction';
+  private apiUrl = 'https://namanbhatia0301-001-site1.ktempurl.com/api/auction';
 
   constructor(private http: HttpClient) {}
 
