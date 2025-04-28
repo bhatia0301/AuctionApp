@@ -1,2 +1,20 @@
-bin
-obj
+# Ignore Visual Studio temporary files, build results, and
+# User-specific files
+
+## Ignore Visual Studio artifacts
+.vs/
+*.user
+*.suo
+
+## Ignore build results
+bin/
+obj/
+out/
+
+## Ignore publish folder
+publish/
+
+## Ignore settings files inside api folder
+AuctionApp.API/appsettings.json
+AuctionApp.API/appsettings.Development.json
+AuctionApp.Infrastructure/Migrations
