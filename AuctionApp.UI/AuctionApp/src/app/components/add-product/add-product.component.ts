@@ -57,6 +57,7 @@ export class AddProductComponent implements OnInit {
   }
 
   onSubmit(): void {
+    debugger;
     if (this.productForm.valid) {
       const selectedCategoryId = Number(
         this.productForm.get('category')?.value
