@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class BidService {
-  private apiUrl = 'http://auction-app.runasp.net/api/bid';
+  private apiUrl = 'https://auction-app.runasp.net/api/bid';
 
   constructor(private http: HttpClient) {}
 

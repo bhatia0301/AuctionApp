@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ProductService {
-  private apiUrl = 'http://auction-app.runasp.net/api/product';
+  private apiUrl = 'https://auction-app.runasp.net/api/product';
 
   constructor(private http: HttpClient) {}
 

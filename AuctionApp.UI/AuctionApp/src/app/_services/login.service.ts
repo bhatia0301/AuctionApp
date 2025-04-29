@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
   currentUser: any = null;
-  private apiUrl = 'http://auction-app.runasp.net/api/auth/login';
+  private apiUrl = 'https://auction-app.runasp.net/api/auth/login';
 
   constructor(private http: HttpClient) {}
 
