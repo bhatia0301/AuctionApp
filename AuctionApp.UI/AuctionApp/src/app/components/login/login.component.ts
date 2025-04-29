@@ -17,6 +17,7 @@ export class LoginComponent {
   constructor(private loginService: LoginService, private route: Router) {}
 
   onLoginClick(): void {
+    debugger;
     if (!this.loginData.email || !this.loginData.password) {
       this.errorMessage = 'Please fill in all fields.';
       return;
