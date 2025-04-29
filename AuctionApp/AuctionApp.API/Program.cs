@@ -89,7 +89,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("CorsPolicy", builder =>
     {
         builder
-            .WithOrigins("https://auction-app-murex.vercel.app/", "http://localhost:4200")
+            .WithOrigins("https://auction-app-murex.vercel.app", "http://localhost:4200")
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials();
