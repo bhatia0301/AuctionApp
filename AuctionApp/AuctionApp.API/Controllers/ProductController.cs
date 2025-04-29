@@ -14,18 +14,20 @@ namespace AuctionApp.API.Controllers
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
         private readonly IAuthService _authService;
+        private readonly IPhotoService _photoService;
         private readonly IWebHostEnvironment _env;
+
         private ResponseDTO response;
 
         public ProductController(IProductService productService, IWebHostEnvironment env, 
-            ICategoryService categoryService, IAuthService authService)
+            ICategoryService categoryService, IAuthService authService, IPhotoService photoService)
         {
             _productService = productService;
             response = new ResponseDTO();
             _env = env;
             _categoryService = categoryService;
             _authService = authService;
-
+            _photoService = photoService;
         }
 
         [Authorize(Roles = "User")]
@@ -74,7 +76,15 @@ namespace AuctionApp.API.Controllers
                         response.Result = null;
                         return response;
                     }
-                    product.ProductImage = await UploadImageAsync(addProductDTO.ProductImage);
+                    var result = await _photoService.UploadPhotoAsync(addProductDTO.ProductImage);
+                    if (result.Error != null)
+                    {
+                        response.IsSuccess = false;
+                        response.Message = result.Error.Message;
+                        response.Result = null;
+                        return response;
+                    }
+                    product.ProductImage = result.Url.ToString();
                 }
                 else
                 {
@@ -109,28 +119,30 @@ namespace AuctionApp.API.Controllers
             return response;
         }
 
-        private async Task<string> UploadImageAsync(IFormFile productImage)
-        {
-            try
-            {
-                var uploadsFolder = Path.Combine(_env.WebRootPath, "images");
-                var uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(productImage.FileName);
-                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+        #region
+        //private async Task<string> UploadImageAsync(IFormFile productImage)
+        //{
+        //    try
+        //    {
+        //        var uploadsFolder = Path.Combine(_env.WebRootPath, "images");
+        //        var uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(productImage.FileName);
+        //        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    await productImage.CopyToAsync(fileStream);
-                }
+        //        using (var fileStream = new FileStream(filePath, FileMode.Create))
+        //        {
+        //            await productImage.CopyToAsync(fileStream);
+        //        }
 
-                return uniqueFileName;
+        //        return uniqueFileName;
 
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Image upload failed: " + ex.Message);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("Image upload failed: " + ex.Message);
 
-            }
-        }
+        //    }
+        //}
+        #endregion
 
         [HttpGet("Get-All-Products")]
         public async Task<ResponseDTO> GetAllProduct()
@@ -141,8 +153,6 @@ namespace AuctionApp.API.Controllers
                 var productsDTO = new List<ProductDTO>();
                 foreach (var product in products)
                 {
-                    var baseUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
-                    var productImageUrl = $"{baseUrl}/images/{product.ProductImage}";
                     productsDTO.Add(new ProductDTO
                     {
                         Id = product.Id,
@@ -152,7 +162,7 @@ namespace AuctionApp.API.Controllers
                         AuctionDuration = product.AuctionDuration,
                         CategoryName = product.Category.Name,
                         ReservedPrice = product.ReservedPrice,
-                        ProductImage = productImageUrl,
+                        ProductImage = product.ProductImage,
                         BoughtByUserId = product.BoughtByUserId,        
                         CreatedAt = product.CreatedAt
                     });
@@ -181,8 +191,6 @@ namespace AuctionApp.API.Controllers
                     response.Message = "Product not found!";
                     return response;
                 }
-                var baseUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
-                var productImageUrl = $"{baseUrl}/images/{product.ProductImage}";
                 var productDTO = new ProductDTO
                 {
                     Id = product.Id,
@@ -192,7 +200,7 @@ namespace AuctionApp.API.Controllers
                     AuctionDuration = product.AuctionDuration,
                     CategoryName = product.Category.Name,
                     ReservedPrice = product.ReservedPrice,
-                    ProductImage = productImageUrl,
+                    ProductImage = product.ProductImage,
                     BoughtByUserId = product.BoughtByUserId,
                     CreatedAt = product.CreatedAt
                 };
