@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'https://namanbhatia0301-001-site1.ktempurl.com/api/auth';
+  private apiUrl = 'http://auction-app.runasp.net/api/auth';
 
   constructor(private http: HttpClient) {}
 

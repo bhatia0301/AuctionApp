@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CategoryService {
-  private apiUrl = 'https://namanbhatia0301-001-site1.ktempurl.com/api/category';
+  private apiUrl = 'http://auction-app.runasp.net/api/category';
 
   constructor(private http: HttpClient) {}
 

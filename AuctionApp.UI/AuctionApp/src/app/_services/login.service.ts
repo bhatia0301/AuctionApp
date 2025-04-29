@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
   currentUser: any = null;
-  private apiUrl = 'https://namanbhatia0301-001-site1.ktempurl.com/api/auth/login';
+  private apiUrl = 'http://auction-app.runasp.net/api/auth/login';
 
   constructor(private http: HttpClient) {}
 
