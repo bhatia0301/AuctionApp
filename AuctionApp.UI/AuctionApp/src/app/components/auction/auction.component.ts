@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { AuctionService } from 'src/app/_services/auction.service';
 
 @Component({
@@ -13,7 +12,6 @@ export class AuctionComponent implements OnInit {
   loading: boolean = true;
   remainingTime: string = '';
   isAuctionOngoing: boolean = true;
-  private countdownSubscription?: Subscription;
 
   constructor(
     private auctionService: AuctionService,
@@ -27,7 +25,6 @@ export class AuctionComponent implements OnInit {
       this.auctionService.getAuctionById(auctionId).subscribe(
         (response: any) => {
           this.auction = response.result;
-
           this.loading = false;
         },
         (error: any) => {

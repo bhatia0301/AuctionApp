@@ -57,7 +57,6 @@ export class AddProductComponent implements OnInit {
   }
 
   onSubmit(): void {
-    debugger;
     if (this.productForm.valid) {
       const selectedCategoryId = Number(
         this.productForm.get('category')?.value
@@ -85,11 +84,6 @@ export class AddProductComponent implements OnInit {
           this.selectedFile.name
         );
       }
-
-      formData.forEach((value, key) => {
-        console.log(`${key}: ${value}`);
-      });
-
       this.productService.createProduct(formData).subscribe(
         (response: any) => {
           if (response.isSuccess) {

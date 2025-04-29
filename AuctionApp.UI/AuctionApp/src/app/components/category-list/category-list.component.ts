@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 import { CategoryService } from 'src/app/_services/category.service';
 
 @Component({
@@ -14,9 +13,7 @@ export class CategoryListComponent implements OnInit {
   newCategory = { name: '' };
 
   constructor(
-    private categoryService: CategoryService,
-    private router: Router
-  ) {}
+    private categoryService: CategoryService  ) {}
 
   ngOnInit(): void {
     this.getAllCategories();
