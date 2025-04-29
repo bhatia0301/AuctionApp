@@ -233,8 +233,6 @@ namespace AuctionApp.API.Controllers
                 var productsDTO = new List<ProductDTO>();
                 foreach (var product in products)
                 {
-                    var baseUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
-                    var productImageUrl = $"{baseUrl}/images/{product.ProductImage}";
                     productsDTO.Add(new ProductDTO
                     {
                         Id = product.Id,
@@ -244,7 +242,7 @@ namespace AuctionApp.API.Controllers
                         AuctionDuration = product.AuctionDuration,
                         CategoryName = product.Category.Name,
                         ReservedPrice = product.ReservedPrice,
-                        ProductImage = productImageUrl,
+                        ProductImage = product.ProductImage,
                         BoughtByUserId = product.BoughtByUserId,
                         CreatedAt = product.CreatedAt
                     });
@@ -277,8 +275,6 @@ namespace AuctionApp.API.Controllers
                 var productsDTO = new List<ProductDTO>();
                 foreach (var product in products)
                 {
-                    var baseUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
-                    var productImageUrl = $"{baseUrl}/images/{product.ProductImage}";
                     productsDTO.Add(new ProductDTO
                     {
                         Id = product.Id,
@@ -288,7 +284,7 @@ namespace AuctionApp.API.Controllers
                         AuctionDuration = product.AuctionDuration,
                         CategoryName = product.Category.Name,
                         ReservedPrice = product.ReservedPrice,
-                        ProductImage = productImageUrl,
+                        ProductImage = product.ProductImage,
                         BoughtByUserId = product.BoughtByUserId,    
                         CreatedAt = product.CreatedAt
                     });
@@ -322,9 +318,7 @@ namespace AuctionApp.API.Controllers
                 foreach (var product in products)
                 {
                     var user = await _authService.GetUserByIdAsync(product.UserId);
-                    var baseUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
                     var category = await _categoryService.GetCategoryById(product.CategoryId);
-                    var productImageUrl = $"{baseUrl}/images/{product.ProductImage}";
                     productsDTO.Add(new ProductDTO
                     {
                         Id = product.Id,
@@ -334,7 +328,7 @@ namespace AuctionApp.API.Controllers
                         AuctionDuration = product.AuctionDuration,
                         CategoryName = category.Name,
                         ReservedPrice = product.ReservedPrice,
-                        ProductImage = productImageUrl,
+                        ProductImage = product.ProductImage,
                         BoughtByUserId = userId,
                         CreatedAt = product.CreatedAt
                     });
