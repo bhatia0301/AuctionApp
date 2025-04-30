@@ -39,8 +39,6 @@ namespace AuctionApp.API.Controllers
                     var user = await _authService.GetUserByIdAsync(auction.HighestBidUserId);
                     var product = await _productService.GetProductByIdAsync(auction.ProductId);
                     var category = await _categoryService.GetCategoryById(product.CategoryId);
-                    var baseUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
-                    var productImageUrl = $"{baseUrl}/images/{product.ProductImage}";
                     auctionsDTO.Add(new AuctionDTO
                     {
                         Id = auction.Id,
@@ -50,7 +48,7 @@ namespace AuctionApp.API.Controllers
                         ProductDescription = product.Description,
                         AuctionDuration = product.AuctionDuration,
                         CategoryName = category.Name,   
-                        ProductImage = productImageUrl,
+                        ProductImage = product.ProductImage,
                         BidCount = auction.BidCount,    
                         CreatedAt = product.CreatedAt
                     });
@@ -83,8 +81,6 @@ namespace AuctionApp.API.Controllers
                 var user = await _authService.GetUserByIdAsync(auction.HighestBidUserId);
                 var product = await _productService.GetProductByIdAsync(auction.ProductId);
                 var category = await _categoryService.GetCategoryById(auction.Product.CategoryId);
-                var baseUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
-                var productImageUrl = $"{baseUrl}/images/{product.ProductImage}";
                 var auctionDTO = new AuctionDTO
                 {
                     Id = auction.Id,
@@ -94,7 +90,7 @@ namespace AuctionApp.API.Controllers
                     ProductDescription = product.Description,
                     AuctionDuration = product.AuctionDuration,
                     CategoryName = category.Name,
-                    ProductImage = productImageUrl,
+                    ProductImage = product.ProductImage,
                     BidCount = auction.BidCount,
                     CreatedAt = product.CreatedAt
                 };
