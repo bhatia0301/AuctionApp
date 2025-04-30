@@ -37,8 +37,8 @@ To log in and test the application, use the following seeded credentials:
 
 | Role        | Email                | Password   |
 |-------------|----------------------|------------|
-| Admin       | admi01n@gmail.com    | Admin@123  |
-| Admin       | admin02@example.com  | Admin@123  |
+| Admin       | admin01@gmail.com    | Admin@123  |
+| Admin       | admin02@gmail.com    | Admin@123  |
 | Normal User | ishita@gmail.com     | User@123   |
 | Normal User | khushi@gmail.com     | User@123   |
 | Normal User | rohit@gmail.com      | User@123   |
